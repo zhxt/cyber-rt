@@ -20,18 +20,20 @@ include(cmake/external/gflags-2.2.0.cmake)
 include(cmake/external/Fast-RTSP-1.5.0.cmake)
 include(cmake/external/protobuf-3.3.0.cmake)
 
-set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/local_depends )
+set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/local_depends)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+#list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 #set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 message(STATUS "CMake Prefix Path: ${CMAKE_PREFIX_PATH}")
 message(STATUS "CMake Module Path: ${CMAKE_MODULE_PATH}")
 
 
-if (EXISTS ${CMAKE_CURRENT_BINARY_DIR}/local_depends)
+if (EXISTS "${CMAKE_CURRENT_BINARY_DIR}/local_depends/lib")
 
+  message(STATUS "Start building")
   find_package(FastRTPS 1.5.0 REQUIRED)
-  find_package(glog REQUIRED)
+  find_package(Glog REQUIRED)
   find_package(gflags REQUIRED)
   find_package(Protobuf REQUIRED)
 

@@ -5,7 +5,7 @@ add_library(cyber_core cyber.cc)
 
 add_library(cyber_init init.cc)
 target_link_libraries(cyber_init
-    glog
+    ${Glog_LIBRARY}
     Cyber::service_manager
     Cyber::async_logger
     Cyber::task_manager

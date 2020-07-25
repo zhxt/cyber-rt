@@ -24,7 +24,7 @@ target_link_libraries(cyber_mainboard
     cyber_init
     cyber_node
     cyber_global_data
-    glog
+    ${Glog_LIBRARY}
     gflags
     Cyber::dag_conf
     Cyber::perf_conf

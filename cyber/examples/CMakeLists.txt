@@ -4,7 +4,7 @@ project(examples VERSION 1.0.0)
 
 add_executable(cyber_example_talker talker.cc proto/examples.pb.cc)
 target_link_libraries(cyber_example_talker
-    glog
+    ${Glog_LIBRARY}
     gflags
     pthread
     Cyber::init
@@ -19,7 +19,7 @@ target_link_libraries(cyber_example_talker
 
 add_executable(cyber_example_listener listener.cc proto/examples.pb.cc)
 target_link_libraries(cyber_example_listener
-    glog
+    ${Glog_LIBRARY}
     gflags
     pthread
     Cyber::init

@@ -12,7 +12,7 @@ set(FASTRTPS_SRC file:///${CMAKE_SOURCE_DIR}/tmp/Fast-RTPS-1.5.0.tar.gz )
 #find_package(fastrtps QUIET)
 
 #if(NOT fastrtps_FOUND)
-  message(STATUS "fastrtps not found")
+#  message(STATUS "fastrtps not found")
   option(BUILD_SHARED_LIBS "Create shared libraries by default" ON)
 
   if(BUILD_SHARED_LIBS)

@@ -5,8 +5,8 @@ find_package(glog QUIET)
 
 set(GLOG_SRC file:///${CMAKE_SOURCE_DIR}/tmp/glog-0.3.5.tar.gz )
 
-if(NOT glog_FOUND)
-  message(STATUS "glog not found")
+#if(NOT glog_FOUND)
+#  message(STATUS "glog not found")
   option(BUILD_SHARED_LIBS "Create shared libraries by default" ON)
 
   if(BUILD_SHARED_LIBS)
@@ -26,6 +26,7 @@ if(NOT glog_FOUND)
   PREFIX external
   UPDATE_COMMAND ""
   CMAKE_ARGS
+    -DBUILD_SHARED_LIBS=ON
     -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/local_depends/
     ${extra_cmake_args}
     -Wno-dev
@@ -33,9 +34,9 @@ if(NOT glog_FOUND)
 
   install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/local_depends/
   DESTINATION ${CMAKE_INSTALL_PREFIX})
-else()
-	message(STATUS "Found glog ${glog_VERSION} ${glog_INCLUDE_DIR}" )
-endif()
+#else()
+#	message(STATUS "Found glog ${glog_VERSION} ${glog_INCLUDE_DIR}" )
+#endif()
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
