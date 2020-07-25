@@ -7,9 +7,10 @@ set(THIRDPARTY_LIBS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/opt/thirdparty/")
 
 set(PROTOBUF_SRC file:///${CMAKE_SOURCE_DIR}/tmp/protobuf-3.3.0.tar.gz )
 
-find_package(protobuf QUIET)
+find_package(Protobuf QUIET)
 
-if(NOT protobuf_FOUND)
+if(NOT Protobuf_FOUND)
+  message(STATUS "Protobuf not found, going to build it")
   option(BUILD_SHARED_LIBS "Create shared libraries by default" ON)
 
   if(BUILD_SHARED_LIBS)
@@ -52,7 +53,7 @@ if(NOT protobuf_FOUND)
   #install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/local_depends/
   #DESTINATION ${CMAKE_INSTALL_PREFIX})
 else()
-	message(STATUS "Found protobuf ${protobuf_VERSION}")
+	message(STATUS "Found Protobuf ${protobuf_VERSION}")
 endif()
 
 

@@ -56,6 +56,7 @@ target_link_libraries(cyber_example_record
 
 add_executable(cyber_example_service service.cc proto/examples.pb.cc)
 target_link_libraries(cyber_example_service
+    pthread
     gflags
     Cyber::init
     Cyber::core

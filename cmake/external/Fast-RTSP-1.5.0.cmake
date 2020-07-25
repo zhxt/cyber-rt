@@ -9,10 +9,10 @@ set(THIRDPARTY_LIBS_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/opt/thirdparty/")
 set(FASTRTPS_SRC file:///${CMAKE_SOURCE_DIR}/tmp/Fast-RTPS-1.5.0.tar.gz )
 
 ####
-#find_package(fastrtps QUIET)
+find_package(FastRTPS QUIET)
 
-#if(NOT fastrtps_FOUND)
-#  message(STATUS "fastrtps not found")
+if(NOT FastRTPS_FOUND)
+  message(STATUS "FastRTPS not found, going to build it")
   option(BUILD_SHARED_LIBS "Create shared libraries by default" ON)
 
   if(BUILD_SHARED_LIBS)
@@ -42,7 +42,6 @@ set(FASTRTPS_SRC file:///${CMAKE_SOURCE_DIR}/tmp/Fast-RTPS-1.5.0.tar.gz )
     -DPERFORMANCE_TESTS=OFF
     -DBUILD_DOCUMENTATION=OFF
     -DCOMPILE_EXAMPLES=OFF
-    -DBUILD_TESTING=OFF
     -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/local_depends/
     ${extra_cmake_args}
     -Wno-dev
@@ -51,9 +50,9 @@ set(FASTRTPS_SRC file:///${CMAKE_SOURCE_DIR}/tmp/Fast-RTPS-1.5.0.tar.gz )
 
   install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/local_depends/
   DESTINATION ${CMAKE_INSTALL_PREFIX})
-#else()
-  #message(STATUS "Found fastrtps ${fastrtps_VERSION}")
-#endif()
+else()
+  message(STATUS "Found FastRTPS ${FastRTPS_VERSION}")
+endif()
 
 
 include(CMakePackageConfigHelpers)
@@ -65,7 +64,3 @@ write_basic_package_version_file(
 #  "${PROJECT_BINARY_DIR}/fastrtpsConfig.cmake"
 #  "${PROJECT_BINARY_DIR}/fastrtpsConfig-version.cmake"
 #  DESTINATION share/${PROJECT_NAME}/cmake)
-
-ExternalProject_Get_Property(fastrtps install_dir)
-message(STATUS "${fastrtps_VERSION} ${install_dir} ")
-

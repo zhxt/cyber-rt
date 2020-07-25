@@ -38,6 +38,7 @@ target_include_directories(${PROJECT_NAME}
     )
 #]==]
 
+message(STATUS "PN: ${PROJECT_NAME} CPN: ${CMAKE_PROJECT_NAME}")
 install(TARGETS cyber_class_loader cyber_class_loader_manager EXPORT ${PROJECT_NAME}-targets
     COMPONENT ${PROJECT_NAME}
     LIBRARY DESTINATION lib

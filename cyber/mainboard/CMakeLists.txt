@@ -8,10 +8,6 @@ add_executable(cyber_mainboard
     module_controller.cc
     )
 
-#find_package(glog)
-#find_package(gflags)
-#find_package(protobuf)
-
 target_link_libraries(cyber_mainboard
     PUBLIC
     cyber_class_loader

@@ -32,8 +32,6 @@ add_library(cyber_role role/role.cc)
 
 add_library(cyber_manager specific_manager/manager.cc)
 add_dependencies(cyber_manager FastRTPS::fastrtps)
-#link_directories(${FastRTPS_LIBRARY})
-message(STATUS "fastlib: " ${FastRTPS_LIBRARY})
 target_link_libraries(cyber_manager INTERFACE FastRTPS::fastrtps
     cyber_qos_profile_conf
     cyber_attributes_filter

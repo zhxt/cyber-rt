@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.5)
-project(Cyber C CXX ASM)
 
 set(CMAKE_ASM_CREATE_SHARED_LIBRARY "ld <CMAKE_SHARED_LIBRARY_CREATE_ASM_FLAGS>
 <CMAKE_SHARED_LIBRARY_SONAME_ASM_FLAG><TARGET_SONAME> <LINK_FLAGS> -o <TARGET> <OBJECTS> <LINK_LIBRARIES>")
@@ -15,33 +14,37 @@ set(CYBER_INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_PREFIX}/opt/CyberRT/include)
 set(LOCAL_DEPENDS_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/local_depends )
 
 
+set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/local_depends)
+
+if (${CMAKE_VERSION} VERSION_LESS "3.15.0")
+  set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake "${CMAKE_MODULE_PATH}")
+else (${CMAKE_VERSION} VERSION_LESS "3.15.0")
+  list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+endif()
+
+message(STATUS "CMake Prefix Path: ${CMAKE_PREFIX_PATH}")
+message(STATUS "CMake Module Path: ${CMAKE_MODULE_PATH}")
+
 include(cmake/external/glog-0.3.5.cmake)
 include(cmake/external/gflags-2.2.0.cmake)
 include(cmake/external/Fast-RTSP-1.5.0.cmake)
 include(cmake/external/protobuf-3.3.0.cmake)
 
-set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/local_depends)
-
-#list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
-#set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-message(STATUS "CMake Prefix Path: ${CMAKE_PREFIX_PATH}")
-message(STATUS "CMake Module Path: ${CMAKE_MODULE_PATH}")
-
+project(Cyber VERSION 1.0.0 LANGUAGES C CXX ASM)
 
 if (EXISTS "${CMAKE_CURRENT_BINARY_DIR}/local_depends/lib")
 
-  message(STATUS "Start building")
+  message(STATUS "Build cyber")
   find_package(FastRTPS 1.5.0 REQUIRED)
   find_package(Glog REQUIRED)
-  find_package(gflags REQUIRED)
+  find_package(Gflags REQUIRED)
   find_package(Protobuf REQUIRED)
 
-include_directories(
+  include_directories(
     PUBLIC
     ${PROJECT_SOURCE_DIR}/
     ${CMAKE_CURRENT_BINARY_DIR}/local_depends/include/
-    )
+  )
 
 add_subdirectory(cyber/base)
 add_subdirectory(cyber/blocker)

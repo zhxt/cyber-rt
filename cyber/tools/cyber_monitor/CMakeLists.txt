@@ -12,6 +12,7 @@ add_executable(cyber_monitor
     )
 
 target_link_libraries(cyber_monitor
+    pthread
     ncurses
     gflags
     Cyber::init

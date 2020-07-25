@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.5)
-project(glog VERSION "0.3.5")
+project(Glog VERSION "0.3.5")
 
-find_package(glog QUIET)
+find_package(Glog QUIET)
 
 set(GLOG_SRC file:///${CMAKE_SOURCE_DIR}/tmp/glog-0.3.5.tar.gz )
 
-#if(NOT glog_FOUND)
-#  message(STATUS "glog not found")
+if(NOT Glog_FOUND)
+  message(STATUS "Glog not found, going to build it")
   option(BUILD_SHARED_LIBS "Create shared libraries by default" ON)
 
   if(BUILD_SHARED_LIBS)
@@ -34,16 +34,16 @@ set(GLOG_SRC file:///${CMAKE_SOURCE_DIR}/tmp/glog-0.3.5.tar.gz )
 
   install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/local_depends/
   DESTINATION ${CMAKE_INSTALL_PREFIX})
-#else()
-#	message(STATUS "Found glog ${glog_VERSION} ${glog_INCLUDE_DIR}" )
-#endif()
+else()
+	message(STATUS "Found Glog ${Glog_VERSION} ${Glog_INCLUDE_DIR}" )
+endif()
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  "${PROJECT_BINARY_DIR}/glogConfig-version.cmake"
+  "${PROJECT_BINARY_DIR}/GlogConfig-version.cmake"
   COMPATIBILITY AnyNewerVersion)
 
 install(FILES
-    #"${PROJECT_BINARY_DIR}/glogConfig.cmake"
-  "${PROJECT_BINARY_DIR}/glogConfig-version.cmake"
+    #"${PROJECT_BINARY_DIR}/GlogConfig.cmake"
+  "${PROJECT_BINARY_DIR}/GlogConfig-version.cmake"
   DESTINATION share/${PROJECT_NAME}/cmake)
