@@ -63,7 +63,8 @@ target_link_libraries(cyber_example_service
     Cyber::component_base
     Cyber::endpoint
     )
-
+add_subdirectory(common_component_example)
+add_subdirectory(timer_component_example)
 install(TARGETS
     cyber_example_talker
     cyber_example_listener
