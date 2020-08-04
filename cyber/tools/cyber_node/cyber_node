@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # ****************************************************************************
 # Copyright 2019 The Apollo Authors. All Rights Reserved.
 
@@ -19,7 +19,7 @@ import sys
 import os
 
 sys.path.append("../")
-from cyber_py import cyber
+from cyber_py3 import cyber
 
 
 def print_node_info(node_name, sleep_s=2):

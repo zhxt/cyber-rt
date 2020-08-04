@@ -19,7 +19,8 @@
 #include <Python.h>
 #include <string>
 #include <vector>
-
+#include <iostream>
+using namespace std;
 using apollo::cyber::Node;
 using apollo::cyber::PyChannelUtils;
 using apollo::cyber::PyClient;
@@ -641,6 +642,7 @@ PyObject *cyber_PyChannelUtils_get_debugstring_by_msgtype_rawmsgdata(
   char *msgtype = nullptr;
   char *rawdata = nullptr;
   Py_ssize_t len = 0;
+
   if (!PyArg_ParseTuple(
           args,
           const_cast<char *>(
@@ -688,21 +690,34 @@ static PyObject *cyber_PyChannelUtils_get_channels_info(PyObject *self,
                                                         PyObject *args) {
   auto channelsinfo = PyChannelUtils::get_channels_info();
   PyObject *pyobj_channelinfo_dict = PyDict_New();
+
   for (auto &channelinfo : channelsinfo) {
     std::string channel_name = channelinfo.first;
-    PyObject *bld_name = Py_BuildValue("s", channel_name.c_str());
+    //PyUnicode_DecodeUTF8(channel_name.c_str(),channel_name.size(),nullptr);
+   // PyObject *bld_name = Py_BuildValue("s", channel_name.c_str());
+    PyObject *bld_name = PyUnicode_DecodeUTF8(channel_name.c_str(), channel_name.size(), "replace");
     std::vector<std::string> &roleAttr_list = channelinfo.second;
     PyObject *pyobj_list = PyList_New(roleAttr_list.size());
 
     size_t pos = 0;
     for (auto &attr : roleAttr_list) {
+
+    //PyList_SetItem(pyobj_list, pos,
+     //                (Py_BuildValue("s#", attr.c_str(), attr.size())));
+      //PyList_SetItem(pyobj_list, pos,
+       //                (Py_BuildValue("s#", attr.c_str(), attr.size())));
       PyList_SetItem(pyobj_list, pos,
-                     Py_BuildValue("s#", attr.c_str(), attr.size()));
+                     (PyUnicode_DecodeUTF8(attr.c_str(), attr.size(),"replace")));
+      //cout << attr << " dingjingang" << endl;
       pos++;
     }
+    //PyUnicode_AsUTF8String(pyobj_channelinfo_dict);
     PyDict_SetItem(pyobj_channelinfo_dict, bld_name, pyobj_list);
     Py_DECREF(bld_name);
   }
+  //cout << PyUnicode_Check(pyobj_channelinfo_dict) << " dingjiangang" << endl;
+
+
   return pyobj_channelinfo_dict;
 }
 

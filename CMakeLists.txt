@@ -73,7 +73,8 @@ add_subdirectory(cyber/py_wrapper)
 add_subdirectory(cyber/mainboard)
 add_subdirectory(cyber/examples)
 add_subdirectory(cyber/tools/cyber_monitor)
-add_subdirectory(cyber/tools/cyber_channel)
+add_subdirectory(cyber/tools/cyber_recorder)
+
 
 endif()
 
@@ -89,3 +90,8 @@ install(FILES
     "${PROJECT_BINARY_DIR}/CyberConfig.cmake"
     "${PROJECT_BINARY_DIR}/CyberConfig-version.cmake"
   DESTINATION share/${PROJECT_NAME}/cmake)
+install(DIRECTORY cyber/python DESTINATION ${CYBER_INSTALL_DIR}/bin)
+install(DIRECTORY cyber/tools DESTINATION ${CYBER_INSTALL_DIR}/bin)
+install(DIRECTORY cyber/examples DESTINATION ${CYBER_INSTALL_DIR}/bin)
+install(DIRECTORY py_proto DESTINATION ${CYBER_INSTALL_DIR})
+install(DIRECTORY log DESTINATION ${CYBER_INSTALL_DIR})

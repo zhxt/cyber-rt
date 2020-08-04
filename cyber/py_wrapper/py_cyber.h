@@ -39,7 +39,8 @@
 #include "cyber/node/reader.h"
 #include "cyber/node/writer.h"
 #include "cyber/service_discovery/specific_manager/node_manager.h"
-
+#include <iostream>
+using namespace std;
 namespace apollo {
 namespace cyber {
 
@@ -402,8 +403,10 @@ class PyChannelUtils {
 
     for (auto& attr : tmpVec) {
       std::string channel_name = attr.channel_name();
+
       std::string msgdata;
       attr.SerializeToString(&msgdata);
+
       roles_info[channel_name].emplace_back(msgdata);
     }
 
@@ -413,6 +416,7 @@ class PyChannelUtils {
       std::string channel_name = attr.channel_name();
       std::string msgdata;
       attr.SerializeToString(&msgdata);
+
       roles_info[channel_name].emplace_back(msgdata);
     }
     return roles_info;
