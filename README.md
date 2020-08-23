@@ -27,6 +27,7 @@ make
 3. build cyber-rt lite
 
 ```
+cmake ..
 scripts/genprotosrc.sh 
 make
 
