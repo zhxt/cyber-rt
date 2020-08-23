@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # ****************************************************************************
 # Copyright 2019 The Apollo Authors. All Rights Reserved.
 
@@ -14,19 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ****************************************************************************
-
+# -*- coding: utf-8 -*-
 import sys
 import os
 import time
 import math
 
-sys.path.append("../")
-from cyber_py import cyber
-from cyber_py import cyber_time
+sys.path.append("/usr/local/opt/CyberRT/bin/python/")
+from cyber_py3 import cyber
+from cyber_py3 import cyber_time
 
 
 def print_channel_type(channel_name):
-    msgtype = cyber.ChannelUtils.get_msgtype(channel_name)
+    msgtype = cyber.ChannelUtils.get_msgtype(channel_name).decode('utf-8')
     print(channel_name, " type is [", msgtype, "]")
 
 
@@ -341,12 +341,13 @@ class CyberChannelecho(object):
         Channel echo callback.
         """
         # pass
-        # print "py:reader callback raw_data->:"
-        # print type(raw_data) # str
-        # print raw_data # str
-
+        #print("py:reader callback raw_data->:")
+        #print(type(str(raw_data))) # str
+        #print(raw_data) # str
+        #dingjiangang change here, 
         msgtype = cyber.ChannelUtils.get_msgtype(self.channel_name, 0)
-        print(cyber.ChannelUtils.get_debugstring_rawmsgdata(msgtype, raw_data))
+        #print(msgtype.decode("utf-8"))
+        print(cyber.ChannelUtils.get_debugstring_rawmsgdata(msgtype.decode("utf-8"), raw_data).decode("utf-8"))
 
 
 def channel_echo(channel_name):
@@ -396,8 +397,9 @@ if __name__ == '__main__':
         _printallusage()
 
     cyber.init()
-
+    
     argv = sys.argv[0:]
+
     command = argv[1]
     if command == 'list':
         _channel_cmd_list(argv)
